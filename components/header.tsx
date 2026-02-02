@@ -30,7 +30,7 @@ export function Header({ isLoggedIn = false, userRole, onLogout }: HeaderProps) 
       name: "Explore", 
       id: "explore",
       subLinks: [
-        { name: "Find Parishes", href: "/#parishes", icon: Search },
+        { name: "Find Parishes", href: "/search", icon: Search },
         { name: "Upcoming Events", href: "/#events", icon: Calendar },
         { name: "Latest News", href: "/#news", icon: Newspaper },
       ]

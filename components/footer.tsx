@@ -74,7 +74,7 @@ export function Footer() {
               <Church className="h-10 w-10 text-white transform group-hover:-rotate-45 transition-transform duration-500" />
             </div>
             <div className="flex flex-col">
-              <span className="font-serif text-4xl font-bold tracking-tight bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent italic">
+              <span className="font-serif text-4xl font-bold tracking-tight bg-linear-to-r from-white to-white/70 bg-clip-text text-transparent italic">
                 ParishFlow
               </span>
               <div className="h-px w-full bg-[#D4A843] mt-1 shadow-[0_0_8px_rgba(212,168,67,0.5)]"></div>
@@ -192,7 +192,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-xs font-bold text-white/40 uppercase tracking-[0.2em]">
-            © {currentYear} ParishFlow. All rights reserved.
+            © {currentYear} ParishFlow. All rights reserved. | Digitalized by <a href="https://azinex.net" target="_blank" className=" text-[#D4A843] font-bold">Azinex</a>
           </p>
           <div className="flex gap-8 text-[10px] font-bold text-white/40 uppercase tracking-[0.2em]">
             <Link href="#" className="hover:text-[#D4A843] transition-colors">Privacy Policy</Link>
@@ -206,7 +206,7 @@ export function Footer() {
       {showBackToTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-10 right-10 z-[60] p-4 bg-primary text-white rounded-sm shadow-2xl hover:bg-[#D4A843] transition-all duration-300 group shadow-black/50 border border-white/10"
+          className="fixed bottom-10 right-10 z-60 p-4 bg-primary text-white rounded-sm shadow-2xl hover:bg-[#D4A843] transition-all duration-300 group shadow-black/50 border border-white/10"
           aria-label="Back to top"
         >
           <ArrowUp className="h-6 w-6 group-hover:-translate-y-1 transition-transform" />

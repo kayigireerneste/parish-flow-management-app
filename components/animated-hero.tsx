@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import Link from "next/link"
 
 interface HeroSlide {
   title: string
@@ -122,13 +123,15 @@ export function AnimatedHero() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="mt-10"
           >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-accent text-primary font-heading font-bold text-lg rounded-lg hover:bg-opacity-90 transition-colors"
-            >
-              Explore Parishes
-            </motion.button>
+            <Link href="/search">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-4 bg-accent text-primary font-heading font-bold text-lg rounded-lg hover:bg-opacity-90 transition-colors"
+              >
+                Explore Parishes
+              </motion.button>
+            </Link>
           </motion.div>
         </div>
       </div>

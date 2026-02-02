@@ -79,22 +79,47 @@ export function HomeContent() {
       <EventsSermonsSection />
 
       {/* Unified Search & Most Viewed Parishes Section */}
-      <section id="parishes" className="relative py-20 md:py-28 bg-gray-50/20">
+      <motion.section 
+        id="parishes" 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.15 }}
+        variants={{
+          hidden: { opacity: 0 },
+          visible: { 
+            opacity: 1,
+            transition: { staggerChildren: 0.2, duration: 0.8 }
+          }
+        }}
+        className="relative py-20 md:py-28 bg-gray-50/20"
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           
           {/* Search Bar Integration */}
-          <div className="max-w-4xl mx-auto mb-20">
+          <motion.div 
+            variants={{
+              hidden: { opacity: 0, scale: 0.95, y: 30 },
+              visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+            }}
+            className="max-w-4xl mx-auto mb-20"
+          >
             <div className="shadow-2xl shadow-black/5 rounded-2xl">
               <SearchBar size="large" onSearch={handleSearch} />
             </div>
-          </div>
+          </motion.div>
 
-          <div className="text-center mb-12">
+          <motion.div 
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}
+            className="text-center mb-12"
+          >
             <h2 className="text-3xl md:text-4xl font-bold text-primary font-serif tracking-tight">
               Most Viewed Parishes
             </h2>
             <div className="h-0.5 w-16 bg-[#D4A843] mx-auto mt-4"></div>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {[
@@ -119,7 +144,15 @@ export function HomeContent() {
                 status: "Active"
               }
             ].map((parish, idx) => (
-              <div key={idx} className="bg-white rounded-2xl p-5 md:p-6 shadow-xl shadow-black/3 border border-gray-100 flex flex-col relative group hover:shadow-2xl hover:shadow-black/5 transition-all duration-300">
+              <motion.div 
+                key={idx}
+                variants={{
+                  hidden: { opacity: 0, y: 40 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+                }}
+                whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                className="bg-white rounded-2xl p-5 md:p-6 shadow-xl shadow-black/3 border border-gray-100 flex flex-col relative group hover:shadow-2xl hover:shadow-black/5 transition-all duration-300"
+              >
                 {/* Status Indicator */}
                 <div className="absolute top-6 right-6 flex items-center gap-1.5 px-2 py-0.5 bg-green-50 rounded-full border border-green-100">
                   <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
@@ -173,18 +206,30 @@ export function HomeContent() {
                   View Portal
                   <ChevronRight className="h-3.5 w-3.5" />
                 </Link>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* How ParishFlow Works - Redesigned Section */}
-      <section id="how-it-works" className="bg-[#0f0f0f] py-0 overflow-hidden text-white border-y border-white/5">
+      <motion.section 
+        id="how-it-works" 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.2 }}
+        className="bg-[#0f0f0f] py-0 overflow-hidden text-white border-y border-white/5"
+      >
         <div className="max-w-7xl mx-auto px-0 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-stretch">
             {/* Left Column: Image */}
-            <div className="lg:w-1/2 relative min-h-[400px] lg:min-h-[550px]">
+            <motion.div 
+              variants={{
+                hidden: { x: -100, opacity: 0 },
+                visible: { x: 0, opacity: 1, transition: { duration: 1, ease: "easeOut" } }
+              }}
+              className="lg:w-1/2 relative min-h-[400px] lg:min-h-[550px]"
+            >
               <img 
                 src="/photo-1438032005730-c779502df39b.avif" 
                 alt="Atmospheric Church Architecture" 
@@ -193,22 +238,43 @@ export function HomeContent() {
               <div className="absolute inset-0 bg-linear-to-r from-black/40 to-transparent lg:from-transparent lg:to-[#0f0f0f]/50"></div>
               {/* Decorative corner */}
               <div className="absolute top-10 left-10 w-12 h-12 border-t-2 border-l-2 border-[#D4A843]/30 pointer-events-none"></div>
-            </div>
+            </motion.div>
 
             {/* Right Column: Content */}
-            <div className="lg:w-1/2 p-8 md:p-12 lg:p-16 flex flex-col justify-center bg-[#0f0f0f]">
+            <motion.div 
+              variants={{
+                hidden: { x: 100, opacity: 0 },
+                visible: { x: 0, opacity: 1, transition: { duration: 1, ease: "easeOut", staggerChildren: 0.1 } }
+              }}
+              className="lg:w-1/2 p-8 md:p-12 lg:p-16 flex flex-col justify-center bg-[#0f0f0f]"
+            >
               <div className="mb-10">
-                <span className="text-[#D4A843] font-serif italic text-xl lg:text-2xl mb-2 block">
+                <motion.span 
+                  variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
+                  className="text-[#D4A843] font-serif italic text-xl lg:text-2xl mb-2 block"
+                >
                   Connect & Grow
-                </span>
-                <h2 className="text-3xl lg:text-4xl font-bold mb-4 tracking-tight text-white leading-tight">
+                </motion.span>
+                <motion.h2 
+                  variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
+                  className="text-3xl lg:text-4xl font-bold mb-4 tracking-tight text-white leading-tight"
+                >
                   How ParishFlow <br className="hidden md:block" />Works
-                </h2>
-                <div className="h-0.5 w-20 bg-[#D4A843] mb-8"></div>
-                <p className="text-gray-400 text-base leading-relaxed max-w-xl">
+                </motion.h2>
+                <motion.div 
+                  initial={{ width: 0 }}
+                  whileInView={{ width: 80 }}
+                  viewport={{ once: false }}
+                  transition={{ duration: 0.8, delay: 0.5 }}
+                  className="h-0.5 bg-[#D4A843] mb-8"
+                ></motion.div>
+                <motion.p 
+                  variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
+                  className="text-gray-400 text-base leading-relaxed max-w-xl"
+                >
                   Everything you need to connect with your parish community, stay updated on events, 
                   and grow together in faith.
-                </p>
+                </motion.p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8">
@@ -234,7 +300,14 @@ export function HomeContent() {
                     description: "Easy access to parish location and contact information",
                   },
                 ].map((item, idx) => (
-                  <div key={idx} className="group">
+                  <motion.div 
+                    key={idx} 
+                    variants={{
+                      hidden: { opacity: 0, scale: 0.9 },
+                      visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } }
+                    }}
+                    className="group"
+                  >
                     <div className="flex items-center gap-3 mb-3">
                       <div className="text-[#D4A843] group-hover:scale-110 transition-transform duration-300">
                         <item.icon className="h-5 w-5 md:h-6 md:w-6" />
@@ -251,45 +324,107 @@ export function HomeContent() {
                     <p className="text-gray-400 text-xs leading-relaxed font-medium">
                       {item.description}
                     </p>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Call-to-Action Section */}
-      <section className="py-20 md:py-28 bg-primary text-white">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">Are You a Parish?</h2>
-          <p className="text-lg text-white/90 mb-8">
+      <motion.section 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.3 }}
+        variants={{
+          hidden: { opacity: 0 },
+          visible: { opacity: 1, transition: { duration: 1 } }
+        }}
+        className="py-20 md:py-28 bg-primary text-white overflow-hidden"
+      >
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <motion.h2 
+            variants={{
+              hidden: { opacity: 0, y: 30 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+            }}
+            className="font-heading text-3xl md:text-4xl font-bold mb-6"
+          >
+            Are You a Parish?
+          </motion.h2>
+          <motion.p 
+            variants={{
+              hidden: { opacity: 0, y: 30 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.8, delay: 0.1, ease: "easeOut" } }
+            }}
+            className="text-lg text-white/90 mb-8"
+          >
             Manage your parish activities, connect with your community, and stay organized with our admin dashboard.
-          </p>
-          <p className="text-sm text-white/70 mb-8">Contact us to register your parish and access the admin portal.</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
+          </motion.p>
+          <motion.p 
+            variants={{
+              hidden: { opacity: 0, y: 30 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.8, delay: 0.2, ease: "easeOut" } }
+            }}
+            className="text-sm text-white/70 mb-8"
+          >
+            Contact us to register your parish and access the admin portal.
+          </motion.p>
+          <motion.div 
+            variants={{
+              hidden: { opacity: 0, y: 30 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.8, delay: 0.3, ease: "easeOut" } }
+            }}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+          >
+            <motion.a
               href="mailto:info@parishflow.com"
-              className="px-8 py-3 bg-accent text-primary font-heading font-semibold rounded-lg hover:bg-opacity-90 transition"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-3 bg-accent text-primary font-heading font-semibold rounded-lg hover:bg-opacity-90 transition shadow-lg shadow-black/10"
             >
               Register Your Parish
-            </a>
-            <Link
-              href="/admin/login"
-              className="px-8 py-3 border-2 border-white text-white font-heading font-semibold rounded-lg hover:bg-white/10 transition"
+            </motion.a>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              Admin Login
-            </Link>
-          </div>
+              <Link
+                href="/admin/login"
+                className="px-8 py-3 border-2 border-white text-white font-heading font-semibold rounded-lg hover:bg-white/10 transition block shadow-lg shadow-black/10"
+              >
+                Admin Login
+              </Link>
+            </motion.div>
+          </motion.div>
         </div>
-      </section>
+        {/* Background Decoration */}
+        <motion.div 
+          animate={{ x: [0, 20, 0], y: [0, -20, 0], scale: [1, 1.1, 1] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-40 -right-40 w-96 h-96 bg-white/5 rounded-full blur-3xl pointer-events-none"
+        ></motion.div>
+      </motion.section>
 
       {/* About Us Preview Section */}
-      <section id="about" className="py-24 bg-white overflow-hidden">
+      <motion.section 
+        id="about" 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.2 }}
+        className="py-24 bg-white overflow-hidden"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center gap-16">
             {/* Left Column: Content */}
-            <div className="lg:w-1/2">
+            <motion.div 
+              variants={{
+                hidden: { x: -50, opacity: 0 },
+                visible: { x: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut" } }
+              }}
+              className="lg:w-1/2"
+            >
               <span className="text-[#D4A843] font-serif italic text-xl block mb-2">Our Mission</span>
               <h2 className="text-3xl md:text-5xl font-bold text-primary font-serif tracking-tight mb-8">
                 Empowering Faith <br />Communities Digitally
@@ -305,25 +440,39 @@ export function HomeContent() {
                   "Simplified Community Engagement",
                   "Secure & Transparent Administration"
                 ].map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-3">
+                  <motion.div 
+                    key={idx} 
+                    variants={{ hidden: { opacity: 0, x: -20 }, visible: { opacity: 1, x: 0, transition: { delay: idx * 0.1 } } }}
+                    className="flex items-center gap-3"
+                  >
                     <div className="w-5 h-5 rounded-full bg-[#D4A843]/10 flex items-center justify-center">
                       <div className="w-1.5 h-1.5 rounded-full bg-[#D4A843]"></div>
                     </div>
                     <span className="text-gray-700 font-medium">{item}</span>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
-              <Link 
-                href="/about" 
-                className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white rounded-xl font-bold text-sm tracking-widest uppercase hover:bg-[#D4A843] transition-all group shadow-xl shadow-primary/10"
+              <motion.div
+                variants={{ hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, scale: 1, transition: { delay: 0.5 } } }}
               >
-                Learn More About Us
-                <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
+                <Link 
+                  href="/about" 
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white rounded-xl font-bold text-sm tracking-widest uppercase hover:bg-[#D4A843] transition-all group shadow-xl shadow-primary/10"
+                >
+                  Learn More About Us
+                  <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </motion.div>
+            </motion.div>
 
             {/* Right Column: Visual */}
-            <div className="lg:w-1/2 relative">
+            <motion.div 
+              variants={{
+                hidden: { x: 50, opacity: 0 },
+                visible: { x: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut" } }
+              }}
+              className="lg:w-1/2 relative"
+            >
               <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl">
                 <img 
                   src="/about.jpeg"
@@ -335,49 +484,85 @@ export function HomeContent() {
               <div className="absolute -top-10 -right-10 w-64 h-64 bg-accent/10 rounded-full blur-3xl -z-10"></div>
               <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-[#D4A843]/10 rounded-full blur-3xl -z-10"></div>
               <div className="absolute top-1/2 -left-8 w-16 h-16 border-2 border-[#D4A843]/20 rounded-2xl rotate-12"></div>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Statistics Section */}
-      <section className="bg-white border-y border-border">
+      <motion.section 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.3 }}
+        variants={{
+          hidden: { opacity: 0 },
+          visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+        }}
+        className="bg-white border-y border-border"
+      >
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-2 md:grid-cols-4 py-16">
             {/* Christians */}
-            <div className="flex flex-col items-center justify-center p-8 border-r border-b md:border-b-0 border-border">
+            <motion.div 
+              variants={{ hidden: { opacity: 0, scale: 0.8 }, visible: { opacity: 1, scale: 1 } }}
+              className="flex flex-col items-center justify-center p-8 border-r border-b md:border-b-0 border-border"
+            >
               <Heart className="h-8 w-8 text-[#D4A843] mb-4 fill-current" />
               <div className="text-4xl md:text-5xl font-bold text-[#1a5fb4] mb-2">2540 +</div>
               <div className="text-[#D4A843] font-heading font-bold text-xs tracking-widest uppercase text-center">Christians</div>
-            </div>
+            </motion.div>
             {/* Religious Churches */}
-            <div className="flex flex-col items-center justify-center p-8 border-b md:border-b-0 md:border-r border-border">
+            <motion.div 
+              variants={{ hidden: { opacity: 0, scale: 0.8 }, visible: { opacity: 1, scale: 1 } }}
+              className="flex flex-col items-center justify-center p-8 border-b md:border-b-0 md:border-r border-border"
+            >
               <Globe className="h-8 w-8 text-[#D4A843] mb-4" />
               <div className="text-4xl md:text-5xl font-bold text-[#1a5fb4] mb-2">7325 +</div>
               <div className="text-[#D4A843] font-heading font-bold text-xs tracking-widest uppercase text-center">Religious Churches</div>
-            </div>
+            </motion.div>
             {/* Parishes */}
-            <div className="flex flex-col items-center justify-center p-8 border-r md:border-r border-border">
+            <motion.div 
+              variants={{ hidden: { opacity: 0, scale: 0.8 }, visible: { opacity: 1, scale: 1 } }}
+              className="flex flex-col items-center justify-center p-8 border-r md:border-r border-border"
+            >
               <User className="h-8 w-8 text-[#D4A843] mb-4 fill-current" />
               <div className="text-4xl md:text-5xl font-bold text-[#1a5fb4] mb-2">1924 +</div>
               <div className="text-[#D4A843] font-heading font-bold text-xs tracking-widest uppercase text-center">Parishes</div>
-            </div>
+            </motion.div>
             {/* Priests */}
-            <div className="flex flex-col items-center justify-center p-8">
+            <motion.div 
+              variants={{ hidden: { opacity: 0, scale: 0.8 }, visible: { opacity: 1, scale: 1 } }}
+              className="flex flex-col items-center justify-center p-8"
+            >
               <Users className="h-8 w-8 text-[#D4A843] mb-4 fill-current" />
               <div className="text-4xl md:text-5xl font-bold text-[#1a5fb4] mb-2">4275 +</div>
               <div className="text-[#D4A843] font-heading font-bold text-xs tracking-widest uppercase text-center">Priests</div>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Testimonial Section */}
-      <section className="py-24 bg-[#F6F7F8] relative overflow-hidden">
+      <motion.section 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.2 }}
+        variants={{
+          hidden: { opacity: 0, y: 30 },
+          visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
+        }}
+        className="py-24 bg-[#F6F7F8] relative overflow-hidden"
+      >
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative">
             {/* Speech Bubble Slider */}
-            <div className="bg-white rounded-[40px] p-10 md:p-16 shadow-2xl shadow-black/3 border border-gray-100 relative mb-12 min-h-[300px] flex items-center">
+            <motion.div 
+              variants={{
+                hidden: { scale: 0.95, opacity: 0 },
+                visible: { scale: 1, opacity: 1, transition: { duration: 0.6, ease: "backOut" } }
+              }}
+              className="bg-white rounded-[40px] p-10 md:p-16 shadow-2xl shadow-black/3 border border-gray-100 relative mb-12 min-h-[300px] flex items-center"
+            >
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentTestimonial}
@@ -395,7 +580,7 @@ export function HomeContent() {
               
               {/* Bubble Tail */}
               <div className="absolute -bottom-8 left-12 w-0 h-0 border-l-30 border-l-transparent border-t-35 border-t-white border-r-10 border-r-transparent"></div>
-            </div>
+            </motion.div>
 
             {/* Author & Controls */}
             <div className="flex flex-col md:flex-row items-center justify-between gap-8 px-4">
@@ -461,10 +646,20 @@ export function HomeContent() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* News/Updates Section - Redesigned Interactive Slider */}
-      <section id="news" className="relative min-h-[400px] flex items-center overflow-hidden">
+      <motion.section 
+        id="news" 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.3 }}
+        variants={{
+          hidden: { opacity: 0 },
+          visible: { opacity: 1, transition: { duration: 1 } }
+        }}
+        className="relative min-h-[400px] flex items-center overflow-hidden"
+      >
         {/* Background with cinematic overlay */}
         <div className="absolute inset-0 z-0">
           <img 
@@ -479,15 +674,25 @@ export function HomeContent() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-12">
             
             {/* Left: Circular Branding */}
-            <div className="hidden lg:flex shrink-0">
+            <motion.div 
+              variants={{
+                hidden: { opacity: 0, scale: 0.8, rotate: -15 },
+                visible: { opacity: 1, scale: 1, rotate: 0, transition: { duration: 0.8, ease: "backOut" } }
+              }}
+              className="hidden lg:flex shrink-0"
+            >
               <div className="w-56 h-56 rounded-full border-2 border-[#D4A843]/60 flex items-center justify-center p-4">
                 <div className="w-full h-full rounded-full border border-[#D4A843] flex items-center justify-center bg-black/20">
                   <div className="flex flex-col items-center">
                     <div className="relative">
                       <Church className="h-16 w-16 text-white" strokeWidth={1} />
-                      <div className="absolute -top-1 -right-1 w-4 h-4 bg-[#D4A843] rounded-full flex items-center justify-center">
+                      <motion.div 
+                        animate={{ scale: [1, 1.3, 1] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                        className="absolute -top-1 -right-1 w-4 h-4 bg-[#D4A843] rounded-full flex items-center justify-center"
+                      >
                         <div className="w-1 h-1 bg-black rounded-full"></div>
-                      </div>
+                      </motion.div>
                     </div>
                     {/* Minimalist Logo Decoration */}
                     <div className="mt-2 flex gap-1">
@@ -498,10 +703,16 @@ export function HomeContent() {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Center: Content Slider */}
-            <div className="flex-1 max-w-2xl text-center md:text-left py-12">
+            <motion.div 
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.3 } }
+              }}
+              className="flex-1 max-w-2xl text-center md:text-left py-12"
+            >
               <div className="flex items-center gap-3 mb-6 justify-center md:justify-start">
                 <span className="text-[#D4A843] font-serif italic text-3xl lg:text-4xl">
                   Latest News
@@ -541,34 +752,44 @@ export function HomeContent() {
                   </motion.div>
                 </AnimatePresence>
               </div>
-            </div>
+            </motion.div>
 
             {/* Right: Navigation Controls */}
-            <div className="flex items-center gap-6 shrink-0">
+            <motion.div 
+              variants={{
+                hidden: { opacity: 0, x: 20 },
+                visible: { opacity: 1, x: 0, transition: { duration: 0.6, delay: 0.5 } }
+              }}
+              className="flex items-center gap-6 shrink-0"
+            >
               <div className="flex flex-col items-center gap-4">
                 <div className="h-12 w-px bg-white/20"></div>
                 <div className="flex flex-col gap-6">
-                  <button 
+                  <motion.button 
+                    whileHover={{ scale: 1.2, color: "#D4A843" }}
+                    whileTap={{ scale: 0.9 }}
                     onClick={prevNews}
-                    className="text-white/40 hover:text-[#D4A843] transition-colors"
+                    className="text-white/40 transition-colors"
                   >
                     <ChevronLeft className="h-8 w-8" />
-                  </button>
+                  </motion.button>
                   <div className="w-px h-6 bg-[#D4A843] mx-auto"></div>
-                  <button 
+                  <motion.button 
+                    whileHover={{ scale: 1.2, color: "#D4A843" }}
+                    whileTap={{ scale: 0.9 }}
                     onClick={nextNews}
-                    className="text-white/40 hover:text-[#D4A843] transition-colors"
+                    className="text-white/40 transition-colors"
                   >
                     <ChevronRight className="h-8 w-8" />
-                  </button>
+                  </motion.button>
                 </div>
                 <div className="h-12 w-px bg-white/20"></div>
               </div>
-            </div>
+            </motion.div>
 
           </div>
         </div>
-      </section>
+      </motion.section>
     </>
   )
 }
